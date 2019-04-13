@@ -1,0 +1,10 @@
+{% extends 'books/base.html' %}
+{% block body_block %}
+    <div class="container">
+        {% for book in books %}
+        <h3> {{ book.author }} </h3>
+        <h3> {{ book.name }} </h3>
+        <p><img src="https://i2.mybook.io/c/256x426/{{ book.cover }}" alt="Обложка"></p>
+        {% endfor %}
+    </div>
+{% endblock %}
