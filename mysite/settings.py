@@ -13,7 +13,7 @@ SECRET_KEY = '7yelrrqv9acu2((l=_$e*)dfg)2*+eujvhjb1kp$yp35%s8rcm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'chebotarmv.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'chebam.pythonanywhere.com']
 
 
 # Application definition
