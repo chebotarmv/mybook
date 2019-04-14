@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . forms import LoginForm
 import requests
-from django.template import RequestContext
+
 
 def login(request):
     if request.method == "POST":
@@ -18,7 +18,7 @@ def login(request):
                 response.set_cookie('session', session)
                 return response
             else:
-                return HttpResponse ('Wrong request')
+                return HttpResponse('Wrong request')
         else:
             form = LoginForm()
     else:
@@ -26,17 +26,16 @@ def login(request):
         return render(request, 'books/login.html', {'form': form})
 
 
-
 def book_list(request):
     base_url = 'https://mybook.ru'
     if 'session' in request.COOKIES:
         cookies = {'session': request.COOKIES.get('session')}
-        req = requests.get('https://mybook.ru/api/bookuserlist/', headers={"Accept":"application/json, version=5"}, cookies=cookies)
+        req = requests.get('https://mybook.ru/api/bookuserlist/', headers={"Accept": "application/json, version=5"}, cookies=cookies)
         books = []
         while req.json()['meta']['next'] != None:
-            req = requests.get(base_url + req.json()['meta']['next'], headers={"Accept":"application/json, version=5"}, cookies=cookies)
+            req = requests.get(base_url + req.json()['meta']['next'], headers={"Accept": "application/json, version=5"}, cookies=cookies)
             for num in range(int(req.json()['meta']['total_count'])):
-                book={}
+                book = {}
                 book['name'] = req.json()['objects'][num]['book']['name']
                 book['cover'] = req.json()['objects'][num]['book']['default_cover']
                 try:
@@ -46,7 +45,7 @@ def book_list(request):
                 books.append(book)
         else:
             for num in range(int(req.json()['meta']['total_count'])):
-                book={}
+                book = {}
                 book['name'] = req.json()['objects'][num]['book']['name']
                 book['cover'] = req.json()['objects'][num]['book']['default_cover']
                 try:
